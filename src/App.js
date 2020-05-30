@@ -9,12 +9,17 @@ class App extends React.Component {
         globalData: {}
     }
     async componentDidMount() {
-        const data = await fetchCountriesSummary();
-        this.setState({ countriesData: data.Countries, globalData: data.Global });
+        try {
+            const data = await fetchCountriesSummary();
+            this.setState({ countriesData: data.Countries, globalData: data.Global });
+        } catch {
+            console.log("error");
+        }
     }
 
     render() {
-        console.log(this.state);
+        console.log(this.state.countriesData);
+    
         return (
             <div className={styles.container}>
                 <h1>COVID-19 Tracker</h1>
@@ -25,10 +30,14 @@ class App extends React.Component {
                     <Cards />
                 </div>
 
-                <Table data={this.countriesData.data} />
+                <Table />
 
             </div>
         )
+        /**
+         * TODO
+         * 1) 
+         */
     }
 }
 export default App;

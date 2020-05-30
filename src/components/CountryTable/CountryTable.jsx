@@ -1,27 +1,33 @@
 import React, { Component } from 'react';
-import { Table } from 'semantic-ui-react';
+import { Header, Table, Image } from 'semantic-ui-react';
 import _ from 'lodash';
 import styles from './CountryTable.module.css';
-const YEETDATA = [
-
-  { name: 'John', age: 15, gender: 'Male' },
-  { name: 'Amber', age: 40, gender: 'Female' },
-  { name: 'Leslie', age: 25, gender: 'Other' },
-  { name: 'Ben', age: 70, gender: 'Male' },
-]
+import { fetchCountriesSummary } from '../../api';
 
 export default class CountryTable extends Component {
-  state = {
-    column: null,
-    data: YEETDATA,
-    direction: null,
+
+  constructor(props) {
+    super(props);
+    this.state = {
+      column: 'null',
+      data: this.props.data,
+      direction: null,
+    }
   }
 
-  componentDidMount () {
-    console.log("yeet");
+  async componentDidMount() {
+    try {
+      const data = await fetchCountriesSummary();
+      this.setState({ data: data.Countries });
+      this.handleSort('TotalConfirmed');
+    } catch(err) {
+      console.log(err);
+    }
   }
+
 
   handleSort = (clickedColumn) => () => {
+    console.log(clickedColumn);
     const { column, data, direction } = this.state;
     if (column !== clickedColumn) {
       this.setState({
@@ -29,7 +35,7 @@ export default class CountryTable extends Component {
         data: _.sortBy(data, [clickedColumn]),
         direction: 'ascending',
       })
-
+      console.log(this.props);
       return
     }
 
@@ -40,7 +46,11 @@ export default class CountryTable extends Component {
   }
 
   render() {
-    const { column, data, direction } = this.state
+    const { column, data, direction } = this.state;
+    for(var country in data) {
+      data[country]['CurrentlyInfected'] = data[country].TotalConfirmed - data[country].TotalRecovered;
+    }
+    console.log(this.state);
 
     return (
 
@@ -51,76 +61,81 @@ export default class CountryTable extends Component {
               <Table.Row>
 
                 <Table.HeaderCell
-                  sorted={column === 'name' ? direction : null}
-                  onClick={this.handleSort('name')}
+                  sorted={column === 'Country' ? direction : null}
+                  onClick={this.handleSort('Country')}
                 >
                   Country
                 </Table.HeaderCell>
 
                 <Table.HeaderCell
-                  sorted={column === 'age' ? direction : null}
-                  onClick={this.handleSort('age')}
+                  sorted={column === 'TotalConfirmed' ? direction : null}
+                  onClick={this.handleSort('TotalConfirmed')}
                 >
                   Total Confirmed
                 </Table.HeaderCell>
 
                 <Table.HeaderCell
-                  sorted={column === 'gender' ? direction : null}
-                  onClick={this.handleSort('gender')}
+                  sorted={column === 'TotalRecovered' ? direction : null}
+                  onClick={this.handleSort('TotalRecovered')}
                 >
                   Total Recovered
                 </Table.HeaderCell>
 
                 <Table.HeaderCell
-                  sorted={column === 'gender' ? direction : null}
-                  onClick={this.handleSort('gender')}
+                  sorted={column === 'TotalDeaths' ? direction : null}
+                  onClick={this.handleSort('TotalDeaths')}
                 >
                   Total Deaths
                 </Table.HeaderCell>
 
                 <Table.HeaderCell
-                  sorted={column === 'gender' ? direction : null}
-                  onClick={this.handleSort('gender')}
+                  sorted={column === 'NewConfirmed' ? direction : null}
+                  onClick={this.handleSort('NewConfirmed')}
                 >
                   Confirmed Today
                 </Table.HeaderCell>
 
                 <Table.HeaderCell
-                  sorted={column === 'gender' ? direction : null}
-                  onClick={this.handleSort('gender')}
+                  sorted={column === 'NewRecovered' ? direction : null}
+                  onClick={this.handleSort('NewRecovered')}
                 >
                   Recovered Today
                 </Table.HeaderCell>
 
                 <Table.HeaderCell
-                  sorted={column === 'gender' ? direction : null}
-                  onClick={this.handleSort('gender')}
+                  sorted={column === 'NewDeaths' ? direction : null}
+                  onClick={this.handleSort('NewDeaths')}
                 >
                   Deaths Today
                 </Table.HeaderCell>
 
                 <Table.HeaderCell
-                  sorted={column === 'gender' ? direction : null}
-                  onClick={this.handleSort('gender')}
+                  sorted={column === 'CurrentlyInfected' ? direction : null}
+                  onClick={this.handleSort('CurrentlyInfected')}
                 >
-                  Deaths Today
+                  Currently Infected
                 </Table.HeaderCell>
 
-                <Table.HeaderCell
-                  sorted={column === 'gender' ? direction : null}
-                  onClick={this.handleSort('gender')}
-                >
-                  Currently Infected 
-                </Table.HeaderCell>
-                
               </Table.Row>
             </Table.Header>
             <Table.Body>
-              {_.map(data, ({ age, gender, name }) => (
-                <Table.Row key={name}>
-                  <Table.Cell>{name}</Table.Cell>
-                  <Table.Cell>{age}</Table.Cell>
-                  <Table.Cell>{gender}</Table.Cell>
+              {_.map(data, ({ Country, CountryCode, NewConfirmed, NewDeaths, NewRecovered, TotalConfirmed, TotalDeaths, TotalRecovered }) => (
+                <Table.Row key={Country}>
+                  <Table.Cell>
+                  <Image src={"https://www.countryflags.io/"+ CountryCode + "/shiny/64.png"} verticalAlign="middle" size='mini' />
+                  {/* <Header.Content>{Country}</Header.Content> */}
+                  
+                  <div>{Country}</div>
+                  
+
+                  </Table.Cell>
+                  <Table.Cell>{TotalConfirmed.toLocaleString()}</Table.Cell>
+                  <Table.Cell>{TotalRecovered}</Table.Cell>
+                  <Table.Cell>{TotalDeaths}</Table.Cell>
+                  <Table.Cell>{NewConfirmed}</Table.Cell>
+                  <Table.Cell>{NewRecovered}</Table.Cell>
+                  <Table.Cell>{NewDeaths}</Table.Cell>
+                  <Table.Cell>{TotalConfirmed - TotalRecovered}</Table.Cell>
                 </Table.Row>
               ))}
             </Table.Body>
