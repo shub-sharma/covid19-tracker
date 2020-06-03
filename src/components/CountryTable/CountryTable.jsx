@@ -1,8 +1,10 @@
 import React, { Component } from 'react';
-import { Header, Table, Image } from 'semantic-ui-react';
+import { Table, Image } from 'semantic-ui-react';
 import _ from 'lodash';
 import styles from './CountryTable.module.css';
-import { fetchCountriesSummary } from '../../api';
+import { Loader } from 'semantic-ui-react'
+
+
 
 export default class CountryTable extends Component {
 
@@ -10,21 +12,31 @@ export default class CountryTable extends Component {
     super(props);
     this.state = {
       column: 'null',
-      data: this.props.data,
+      data: {},
       direction: null,
+      isFetching: true
     }
   }
 
-  async componentDidMount() {
-    try {
-      const data = await fetchCountriesSummary();
-      this.setState({ data: data.Countries });
-      this.handleSort('TotalConfirmed');
-    } catch(err) {
-      console.log(err);
+  // async componentDidMount() {
+  //   try {
+  //     const data = await fetchCountriesSummary();
+  //     this.setState({ data: data.Countries, isFetching: false });
+  //     this.handleSort('TotalConfirmed');
+  //   } catch (err) {
+  //     console.log(err);
+  //   }
+  // }
+
+  componentWillMount() {
+    if(this.props.data !== {}) {
+      this.setState({data: this.props.data, isFetching: false})
+
     }
   }
-
+  componentDidMount() {
+    this.handleSort('TotalConfirmed')();
+  }
 
   handleSort = (clickedColumn) => () => {
     console.log(clickedColumn);
@@ -35,6 +47,7 @@ export default class CountryTable extends Component {
         data: _.sortBy(data, [clickedColumn]),
         direction: 'ascending',
       })
+      console.log("YEET");
       console.log(this.props);
       return
     }
@@ -46,17 +59,19 @@ export default class CountryTable extends Component {
   }
 
   render() {
+    if (this.state.isFetching) return (<Loader active inline='centered' />);
+    console.log(this.props)
+
     const { column, data, direction } = this.state;
-    for(var country in data) {
+    for (var country in data) {
       data[country]['CurrentlyInfected'] = data[country].TotalConfirmed - data[country].TotalRecovered;
     }
     console.log(this.state);
-
     return (
 
       <div className={styles.container}>
         <div className="ui container">
-          <Table sortable celled fixed selectable>
+          <Table sortable celled fixed inverted selectable>
             <Table.Header>
               <Table.Row>
 
@@ -122,11 +137,11 @@ export default class CountryTable extends Component {
               {_.map(data, ({ Country, CountryCode, NewConfirmed, NewDeaths, NewRecovered, TotalConfirmed, TotalDeaths, TotalRecovered }) => (
                 <Table.Row key={Country}>
                   <Table.Cell>
-                  <Image src={"https://www.countryflags.io/"+ CountryCode + "/shiny/64.png"} verticalAlign="middle" size='mini' />
-                  {/* <Header.Content>{Country}</Header.Content> */}
-                  
-                  <div>{Country}</div>
-                  
+                    <Image src={"https://www.countryflags.io/" + CountryCode + "/shiny/64.png"} verticalAlign="middle" size='mini' />
+                    {/* <Header.Content>{Country}</Header.Content> */}
+
+                    <div>{Country}</div>
+
 
                   </Table.Cell>
                   <Table.Cell>{TotalConfirmed.toLocaleString()}</Table.Cell>

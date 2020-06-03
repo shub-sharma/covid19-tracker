@@ -1,4 +1,20 @@
 .container {
-    overflow-y: scroll;
-    /* max-height: 400px; */
+    /* overflow-y: scroll; */
+    max-height: 400px;
+    margin: 20px;
+}
+
+
+.totalConfirmed {
+    border-bottom: 10px solid rgba(255, 187, 0, 0.472) !important;
+}
+
+.totalDeaths {
+    border-bottom: 10px solid rgba(255, 0, 0, 0.472) !important;
+}
+.currentInfected {
+    border-bottom: 10px solid rgba(0, 0, 0, 0.472) !important;
+}
+.totalRecovered {
+    border-bottom: 10px solid rgba(0, 255, 34, 0.472) !important;
 }

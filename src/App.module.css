@@ -7,6 +7,9 @@
 }
 
 .cards {
-    flex-direction: row;
-    color: blue;
+    color: rgb(255, 255, 255);
+}
+body {
+    margin: 0;
+    background: #2e353f;
 }
