@@ -3,13 +3,28 @@
     align-items: center;
     justify-content: center;
     flex-direction: column;
-    padding: 10px;
+    padding: 20px;
 }
-
+h1 {
+    color: rgb(231, 231, 231);
+    font-size: 40px;
+}
+.error {
+    color: rgb(214, 15, 8);
+    font-family: 'roboto';
+    font-size: 30px;
+    border: 2px solid rgb(126, 126, 126);
+    border-radius: 5px;
+    padding: 20px;
+}
 .cards {
     color: rgb(255, 255, 255);
 }
 body {
     margin: 0;
-    background: #2e353f;
+    background: #26303f;
+}
+.loader {
+    margin: 400px;
+    
 }

@@ -1,5 +1,5 @@
 import React from 'react';
-import { Card } from 'semantic-ui-react'
+import { Card, Container } from 'semantic-ui-react'
 import CountUp from 'react-countup';
 import styles from './Cards.module.css';
 
@@ -9,8 +9,8 @@ const Cards = ({ data: { TotalDeaths, TotalConfirmed, TotalRecovered } }) => {
     return 'Spinner';
   }
   return (
-    <div className={styles.container}>
-      <Card.Group itemsPerRow="4">
+    <Container className={styles.container}>
+      <Card.Group itemsPerRow="4" centered ui two doubling stackable cards>
 
         <Card className={styles.totalConfirmed}>
           <Card.Content>
@@ -57,8 +57,7 @@ const Cards = ({ data: { TotalDeaths, TotalConfirmed, TotalRecovered } }) => {
         </Card>
       </Card.Group>
 
-
-    </div>
+</Container>
   )
 
 

@@ -1,4 +1,28 @@
 .container {
-    overflow-y: scroll;
+    /* overflow-y: scroll; */
+    /* width: 1400px; */
     /* max-height: 400px; */
+    overflow-x:auto !important;
+    
+
 }
+tr:nth-child(even){
+    background-color: #252222;
+}
+th {
+    font-size: 14px;
+}
+tr {
+    font-size: 18px;
+}
+/* .table tr:first-child > th {
+    position: sticky !important;
+    top: 0;
+    z-index: 2;
+}
+
+.tableTop {
+    position: sticky !important;
+    top: 0;
+    z-index: 2;
+} */

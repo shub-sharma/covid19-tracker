@@ -1,12 +1,11 @@
 .container {
-    /* overflow-y: scroll; */
-    max-height: 400px;
     margin: 20px;
 }
 
 
 .totalConfirmed {
     border-bottom: 10px solid rgba(255, 187, 0, 0.472) !important;
+    
 }
 
 .totalDeaths {
