@@ -6,7 +6,6 @@ import styles from './CountryTable.module.css';
 
 
 export default class CountryTable extends Component {
-
 	constructor(props) {
 		super(props);
 		this.state = {
@@ -15,9 +14,9 @@ export default class CountryTable extends Component {
 			direction: null,
 		}
 	}
-  /**
-   * Initially sort the total confirmed cases in a descending order
-   */
+	/**
+	 * Initially sort the total confirmed cases in a descending order
+	 */
 	componentWillMount() {
 		this.setState(
 			{
@@ -46,7 +45,6 @@ export default class CountryTable extends Component {
 	}
 
 	render() {
-		// this.handleSort('TotalConfirmed')();
 		const { column, data, direction } = this.state;
 		for (var country in data) {
 			data[country]['CurrentlyInfected'] = data[country].TotalConfirmed - data[country].TotalRecovered;
@@ -65,7 +63,7 @@ export default class CountryTable extends Component {
 								textAlign="left"
 							>
 								Country
-                </Table.HeaderCell>
+                			</Table.HeaderCell>
 
 							<Table.HeaderCell
 								sorted={column === 'TotalConfirmed' ? direction : null}
@@ -73,14 +71,14 @@ export default class CountryTable extends Component {
 								textAlign="right"
 							>
 								Total Confirmed
-                </Table.HeaderCell>
+                			</Table.HeaderCell>
 
 							<Table.HeaderCell
 								sorted={column === 'TotalRecovered' ? direction : null}
 								onClick={this.handleSort('TotalRecovered')}
 							>
 								Total Recovered
-                </Table.HeaderCell>
+                			</Table.HeaderCell>
 
 							<Table.HeaderCell
 								sorted={column === 'TotalDeaths' ? direction : null}
@@ -88,7 +86,7 @@ export default class CountryTable extends Component {
 								textAlign="right"
 							>
 								Total Deaths
-                </Table.HeaderCell>
+                			</Table.HeaderCell>
 
 							<Table.HeaderCell
 								sorted={column === 'NewConfirmed' ? direction : null}
@@ -96,7 +94,7 @@ export default class CountryTable extends Component {
 								textAlign="right"
 							>
 								Confirmed Today
-                </Table.HeaderCell>
+                			</Table.HeaderCell>
 
 							<Table.HeaderCell
 								sorted={column === 'NewRecovered' ? direction : null}
@@ -104,7 +102,7 @@ export default class CountryTable extends Component {
 								textAlign="right"
 							>
 								Recovered Today
-                </Table.HeaderCell>
+                			</Table.HeaderCell>
 
 							<Table.HeaderCell
 								sorted={column === 'NewDeaths' ? direction : null}
@@ -112,7 +110,7 @@ export default class CountryTable extends Component {
 								textAlign="right"
 							>
 								Deaths Today
-                </Table.HeaderCell>
+                			</Table.HeaderCell>
 
 							<Table.HeaderCell
 								sorted={column === 'CurrentlyInfected' ? direction : null}
@@ -120,7 +118,7 @@ export default class CountryTable extends Component {
 								textAlign="right"
 							>
 								Currently Infected
-                </Table.HeaderCell>
+                			</Table.HeaderCell>
 
 						</Table.Row>
 					</Table.Header>

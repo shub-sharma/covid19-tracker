@@ -2,10 +2,17 @@
     /* overflow-y: scroll; */
     /* width: 1400px; */
     /* max-height: 400px; */
+    /* overflow: scroll; */
+    /* position: relative; */
+
     overflow-x:auto !important;
-    
+    /* position:relative; */
 
 }
+table {
+    position: relative;
+    border-collapse: collapse;
+  }
 tr:nth-child(even){
     background-color: #252222;
 }
@@ -15,14 +22,19 @@ th {
 tr {
     font-size: 18px;
 }
-/* .table tr:first-child > th {
-    position: sticky !important;
-    top: 0;
-    z-index: 2;
-}
 
-.tableTop {
+thead th {
+    /* box-shadow: 0 4px 4px -1px rgba(0, 0, 0, 1); */
+    position: -webkit-sticky; /* for Safari */
+
+    color: blue;
     position: sticky !important;
     top: 0;
     z-index: 2;
-} */
+
+}
+tbody th {
+    position: -webkit-sticky; /* for Safari */
+    position: sticky;
+    left: 0;
+  }
