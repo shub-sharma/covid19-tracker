@@ -132,13 +132,13 @@ export default class CountryTable extends Component {
 
 
 								</Table.Cell>
-								<Table.Cell textAlign="right">{TotalConfirmed.toLocaleString()}</Table.Cell>
-								<Table.Cell textAlign="right">{TotalRecovered.toLocaleString()}</Table.Cell>
-								<Table.Cell textAlign="right">{TotalDeaths.toLocaleString()}</Table.Cell>
-								<Table.Cell textAlign="right">{NewConfirmed.toLocaleString()}</Table.Cell>
-								<Table.Cell textAlign="right">{NewRecovered.toLocaleString()}</Table.Cell>
-								<Table.Cell textAlign="right">{NewDeaths.toLocaleString()}</Table.Cell>
-								<Table.Cell textAlign="right">{(TotalConfirmed - TotalRecovered).toLocaleString()}</Table.Cell>
+								<Table.Cell className={styles.orangeText} textAlign="right">{TotalConfirmed.toLocaleString()}</Table.Cell>
+								<Table.Cell className={styles.greenText} textAlign="right">{TotalRecovered.toLocaleString()}</Table.Cell>
+								<Table.Cell className={styles.redText} textAlign="right">{TotalDeaths.toLocaleString()}</Table.Cell>
+								<Table.Cell className={styles.orangeText} textAlign="right">{NewConfirmed.toLocaleString()}</Table.Cell>
+								<Table.Cell className={styles.greenText} textAlign="right">{NewRecovered.toLocaleString()}</Table.Cell>
+								<Table.Cell className={styles.redText} textAlign="right">{NewDeaths.toLocaleString()}</Table.Cell>
+								<Table.Cell className={styles.greyText} textAlign="right">{(TotalConfirmed - TotalRecovered).toLocaleString()}</Table.Cell>
 							</Table.Row>
 						))}
 					</Table.Body>
