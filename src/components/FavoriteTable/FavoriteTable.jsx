@@ -2,11 +2,11 @@ import React, { Component } from 'react';
 import { Table, Image, Container } from 'semantic-ui-react';
 import { Icon } from 'semantic-ui-react';
 import _ from 'lodash';
-import styles from './CountryTable.module.css';
+import styles from './FavoriteTable.module.css';
 
 
 
-export default class CountryTable extends Component {
+export default class FavoriteTable extends Component {
 	constructor(props) {
 		super(props);
 		console.log(this.props);
@@ -20,14 +20,13 @@ export default class CountryTable extends Component {
 	 * Initially sort the total confirmed cases in a descending order
 	 */
 	componentWillMount() {
-		console.log(this.props)
+		console.log(this.props);
 		this.setState(
 			{
 				column: 'TotalConfirmed',
 				data: _.sortBy(this.props.data, ['TotalConfirmed']).reverse(),
 				direction: 'descending'
 			});
-		this.props.favoriteCountry('Canada');
 	}
 
 	handleSort = (clickedColumn) => () => {
@@ -47,6 +46,7 @@ export default class CountryTable extends Component {
 			direction: direction === 'ascending' ? 'descending' : 'ascending',
 		})
 	}
+
 
 	render() {
 		const { column, data, direction } = this.state;
@@ -132,7 +132,7 @@ export default class CountryTable extends Component {
 								<Table.Cell textAlign="left">
 									<Image src={"https://www.countryflags.io/" + CountryCode + "/shiny/64.png"} verticalAlign="middle" size='mini' />
 
-									{this.props.favoriteCountriesData.find(countryData => countryData.Country === Country) 
+									{this.state.data.find(countryData => countryData.Country === Country) 
 									? 
 									 <Icon className={styles.star} color="yellow" name='star' onClick={() => this.props.favoriteCountry(Country)}/>
 									:
@@ -148,7 +148,7 @@ export default class CountryTable extends Component {
 								<Table.Cell className={styles.orangeText} textAlign="right">{NewConfirmed.toLocaleString()}</Table.Cell>
 								<Table.Cell className={styles.greenText} textAlign="right">{NewRecovered.toLocaleString()}</Table.Cell>
 								<Table.Cell className={styles.redText} textAlign="right">{NewDeaths.toLocaleString()}</Table.Cell>
-								<Table.Cell className={styles.greyText} textAlign="right">{(TotalConfirmed - TotalRecovered - TotalDeaths).toLocaleString()}</Table.Cell>
+								<Table.Cell className={styles.greyText} textAlign="right">{(TotalConfirmed - TotalRecovered).toLocaleString()}</Table.Cell>
 							</Table.Row>
 						))}
 					</Table.Body>
