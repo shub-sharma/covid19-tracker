@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
-import { Table, Image, Container } from 'semantic-ui-react';
-import { Icon } from 'semantic-ui-react';
+import { Table, Image, Container, Header, Icon } from 'semantic-ui-react';
 import _ from 'lodash';
 import styles from './CountryTable.module.css';
 
@@ -27,7 +26,12 @@ export default class CountryTable extends Component {
 				data: _.sortBy(this.props.data, ['TotalConfirmed']).reverse(),
 				direction: 'descending',
 			});
-		this.props.favoriteCountry('Canada');
+		var keys = Object.keys(localStorage),
+			i = keys.length;
+		while (i--) {
+			this.props.favoriteCountry(localStorage[keys[i]]);
+		}
+
 	}
 
 	handleSort = (clickedColumn) => () => {
@@ -55,11 +59,10 @@ export default class CountryTable extends Component {
 			data[country]['CurrentlyInfected'] = data[country].TotalConfirmed - data[country].TotalRecovered;
 		}
 		return (
-
+			
 			<Container className={styles.container}>
-				<h1 className={styles.header}>Favorite Countries</h1>
 
-				<Table className={styles.table} sortable unstackable celled inverted selectable>
+				<Table className={styles.table}  unstackable celled inverted selectable>
 					<Table.Header className={styles.tableTop}>
 						<Table.Row>
 
@@ -117,14 +120,23 @@ export default class CountryTable extends Component {
 						{_.map(data, ({ Country, CountryCode, NewConfirmed, NewDeaths, NewRecovered, TotalConfirmed, TotalDeaths, TotalRecovered }) => (
 							<Table.Row key={Country}>
 								<Table.Cell textAlign="left">
-									<Image src={"https://www.countryflags.io/" + CountryCode + "/shiny/64.png"} verticalAlign="middle" size='mini' />
-
+								<Image src={require(`../../countryFlags/images/${CountryCode}.png`)} alt={`${Country}`} verticalAlign="middle" size='mini' />
 									{this.props.favoriteCountriesData.find(countryData => countryData.Country === Country)
 										?
-										<Icon className={styles.star} color="yellow" name='star' onClick={() => this.props.favoriteCountry(Country)} />
-										:
-										<Icon className={styles.star} name='star outline' onClick={() => this.props.favoriteCountry(Country)} />
+										<Icon className={styles.star} color="yellow" name='star' onClick={() => {
+												this.props.favoriteCountry(Country); 
+												localStorage.removeItem(CountryCode);
 
+												} 
+											}/>
+											:
+											<Icon className={styles.star} color="white" name='star outline' onClick={() => {
+
+												this.props.favoriteCountry(Country); 
+												localStorage[CountryCode] = Country;
+												console.log(localStorage[CountryCode])
+												} 
+											}/>
 									}
 									<div>{Country}</div>
 
@@ -153,8 +165,9 @@ export default class CountryTable extends Component {
 		console.log(this.state);
 		return (
 			<Container>
-				{this.renderFavTable()}
+				<h1 className={styles.header}>Favorite Countries</h1>
 
+				{this.renderFavTable()}
 				<h1 className={styles.header}>Countries List</h1>
 				<Container className={styles.container}>
 					<Table className={styles.table} unstackable sortable celled inverted selectable>
@@ -231,14 +244,24 @@ export default class CountryTable extends Component {
 							{_.map(data, ({ Country, CountryCode, NewConfirmed, NewDeaths, NewRecovered, TotalConfirmed, TotalDeaths, TotalRecovered }) => (
 								<Table.Row key={Country}>
 									<Table.Cell textAlign="left">
-										<Image src={"https://www.countryflags.io/" + CountryCode + "/shiny/64.png"} verticalAlign="middle" size='mini' />
+										<Image src={require(`../../countryFlags/images/${CountryCode}.png`)} alt={`${Country}`} verticalAlign="middle" size='mini' />
 
 										{this.props.favoriteCountriesData.find(countryData => countryData.Country === Country)
 											?
-											<Icon className={styles.star} color="yellow" name='star' onClick={() => this.props.favoriteCountry(Country)} />
-											:
-											<Icon className={styles.star} name='star outline' onClick={() => this.props.favoriteCountry(Country)} />
+											<Icon className={styles.star} color="yellow" name='star' onClick={() => {
+												this.props.favoriteCountry(Country); 
+												localStorage.removeItem(CountryCode);
 
+												} 
+											}/>
+											:
+											<Icon className={styles.star} color="white" name='star outline' onClick={() => {
+
+												this.props.favoriteCountry(Country); 
+												localStorage[CountryCode] = Country;
+												console.log(localStorage[CountryCode])
+												} 
+											}/>
 										}
 										<div>{Country}</div>
 

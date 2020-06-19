@@ -34,7 +34,6 @@ class App extends React.Component {
         try {
             const data = await fetchCountriesSummary();
             this.setState({ countriesData: data.Countries, globalData: data.Global, isFetching: false });
-                        // this.setState({ countriesData: data.Countries, globalData: data.Global, isFetching: false });
         } catch {
             this.setState(
                 {
