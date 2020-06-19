@@ -46,9 +46,14 @@ export default class FavoriteTable extends Component {
 			direction: direction === 'ascending' ? 'descending' : 'ascending',
 		})
 	}
-
+	generateTable = (data) => {
+		return (
+			<h1>yeet</h1>
+		)
+	}
 
 	render() {
+		return this.generateTable('as');
 		const { column, data, direction } = this.state;
 		for (var country in data) {
 			data[country]['CurrentlyInfected'] = data[country].TotalConfirmed - data[country].TotalRecovered;

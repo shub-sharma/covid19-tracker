@@ -3,6 +3,13 @@
     overflow-x:auto !important;
     position: relative;
 }
+.header {
+    margin: 0px;
+    /* border: 1px red solid; */
+    padding: 5px 0px;
+}
+
+
 table {
     position: relative;
 }

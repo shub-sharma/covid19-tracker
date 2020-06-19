@@ -67,7 +67,7 @@ class App extends React.Component {
                 <div className={styles.cards}>
                     <Cards data={this.state.globalData} />
                 </div>
-                <FavoriteTable data={this.state.favoriteCountriesData} favoriteCountry={this.favoriteCountry} />
+                {/* <FavoriteTable data={this.state.favoriteCountriesData} favoriteCountry={this.favoriteCountry} /> */}
 
                 <Table className={styles.table} data={this.state.countriesData} favoriteCountry={this.favoriteCountry} favoriteCountriesData={this.state.favoriteCountriesData}/>
 
