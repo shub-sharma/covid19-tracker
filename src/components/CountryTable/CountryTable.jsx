@@ -59,100 +59,102 @@ export default class CountryTable extends Component {
 			data[country]['CurrentlyInfected'] = data[country].TotalConfirmed - data[country].TotalRecovered;
 		}
 		return (
-			
-			<Container className={styles.container}>
 
-				<Table className={styles.table}  unstackable celled inverted selectable>
-					<Table.Header className={styles.tableTop}>
-						<Table.Row>
+			<div>
+				<h2 className={styles.header}>Favorite Countries</h2>
+				<Container className={styles.container}>
+					<Table className={styles.table} unstackable celled inverted selectable>
+						<Table.Header className={styles.tableTop}>
+							<Table.Row>
 
-							<Table.HeaderCell
-								textAlign="left"
-							>
-								Country
+								<Table.HeaderCell
+									textAlign="left"
+								>
+									Country
                 			</Table.HeaderCell>
 
-							<Table.HeaderCell
-								textAlign="right"
-							>
-								Total Confirmed
+								<Table.HeaderCell
+									textAlign="right"
+								>
+									Total Confirmed
                 			</Table.HeaderCell>
 
-							<Table.HeaderCell
-								textAlign="right"
-							>
-								Total Recovered
+								<Table.HeaderCell
+									textAlign="right"
+								>
+									Total Recovered
                 			</Table.HeaderCell>
 
-							<Table.HeaderCell
-								textAlign="right"
-							>
-								Total Deaths
+								<Table.HeaderCell
+									textAlign="right"
+								>
+									Total Deaths
                 			</Table.HeaderCell>
 
-							<Table.HeaderCell
-								textAlign="right"
-							>
-								Confirmed Today
+								<Table.HeaderCell
+									textAlign="right"
+								>
+									Confirmed Today
                 			</Table.HeaderCell>
 
-							<Table.HeaderCell
-								textAlign="right"
-							>
-								Recovered Today
+								<Table.HeaderCell
+									textAlign="right"
+								>
+									Recovered Today
                 			</Table.HeaderCell>
 
-							<Table.HeaderCell
-								textAlign="right"
-							>
-								Deaths Today
+								<Table.HeaderCell
+									textAlign="right"
+								>
+									Deaths Today
                 			</Table.HeaderCell>
 
-							<Table.HeaderCell
-								textAlign="right"
-							>
-								Currently Infected
+								<Table.HeaderCell
+									textAlign="right"
+								>
+									Currently Infected
                 			</Table.HeaderCell>
 
-						</Table.Row>
-					</Table.Header>
-					<Table.Body>
-						{_.map(data, ({ Country, CountryCode, NewConfirmed, NewDeaths, NewRecovered, TotalConfirmed, TotalDeaths, TotalRecovered }) => (
-							<Table.Row key={Country}>
-								<Table.Cell textAlign="left">
-								<Image src={require(`../../countryFlags/images/${CountryCode}.png`)} alt={`${Country}`} verticalAlign="middle" size='mini' />
-									{this.props.favoriteCountriesData.find(countryData => countryData.Country === Country)
-										?
-										<Icon className={styles.star} color="yellow" name='star' onClick={() => {
-												this.props.favoriteCountry(Country); 
+							</Table.Row>
+						</Table.Header>
+						<Table.Body>
+							{_.map(data, ({ Country, CountryCode, NewConfirmed, NewDeaths, NewRecovered, TotalConfirmed, TotalDeaths, TotalRecovered }) => (
+								<Table.Row key={Country}>
+									<Table.Cell textAlign="left">
+										<Image src={require(`../../countryFlags/images/${CountryCode}.png`)} alt={`${Country}`} verticalAlign="middle" size='mini' />
+										{this.props.favoriteCountriesData.find(countryData => countryData.Country === Country)
+											?
+											<Icon className={styles.star} color="yellow" name='star' onClick={() => {
+												this.props.favoriteCountry(Country);
 												localStorage.removeItem(CountryCode);
 
-												} 
-											}/>
+											}
+											} />
 											:
 											<Icon className={styles.star} color="white" name='star outline' onClick={() => {
 
-												this.props.favoriteCountry(Country); 
+												this.props.favoriteCountry(Country);
 												localStorage[CountryCode] = Country;
 												console.log(localStorage[CountryCode])
-												} 
-											}/>
-									}
-									<div>{Country}</div>
+											}
+											} />
+										}
+										<div>{Country}</div>
 
-								</Table.Cell>
-								<Table.Cell className={styles.orangeText} textAlign="right">{TotalConfirmed.toLocaleString()}</Table.Cell>
-								<Table.Cell className={styles.greenText} textAlign="right">{TotalRecovered.toLocaleString()}</Table.Cell>
-								<Table.Cell className={styles.redText} textAlign="right">{TotalDeaths.toLocaleString()}</Table.Cell>
-								<Table.Cell className={styles.orangeText} textAlign="right">{NewConfirmed.toLocaleString()}</Table.Cell>
-								<Table.Cell className={styles.greenText} textAlign="right">{NewRecovered.toLocaleString()}</Table.Cell>
-								<Table.Cell className={styles.redText} textAlign="right">{NewDeaths.toLocaleString()}</Table.Cell>
-								<Table.Cell className={styles.greyText} textAlign="right">{(TotalConfirmed - TotalRecovered - TotalDeaths).toLocaleString()}</Table.Cell>
-							</Table.Row>
-						))}
-					</Table.Body>
-				</Table>
-			</Container>
+									</Table.Cell>
+									<Table.Cell className={styles.orangeText} textAlign="right">{TotalConfirmed.toLocaleString()}</Table.Cell>
+									<Table.Cell className={styles.greenText} textAlign="right">{TotalRecovered.toLocaleString()}</Table.Cell>
+									<Table.Cell className={styles.redText} textAlign="right">{TotalDeaths.toLocaleString()}</Table.Cell>
+									<Table.Cell className={styles.orangeText} textAlign="right">{NewConfirmed.toLocaleString()}</Table.Cell>
+									<Table.Cell className={styles.greenText} textAlign="right">{NewRecovered.toLocaleString()}</Table.Cell>
+									<Table.Cell className={styles.redText} textAlign="right">{NewDeaths.toLocaleString()}</Table.Cell>
+									<Table.Cell className={styles.greyText} textAlign="right">{(TotalConfirmed - TotalRecovered - TotalDeaths).toLocaleString()}</Table.Cell>
+								</Table.Row>
+							))}
+						</Table.Body>
+					</Table>
+				</Container>
+			</div>
 		)
 	}
 
@@ -165,10 +167,9 @@ export default class CountryTable extends Component {
 		console.log(this.state);
 		return (
 			<Container>
-				<h1 className={styles.header}>Favorite Countries</h1>
 
 				{this.renderFavTable()}
-				<h1 className={styles.header}>Countries List</h1>
+				<h2 className={styles.header}>Countries List</h2>
 				<Container className={styles.container}>
 					<Table className={styles.table} unstackable sortable celled inverted selectable>
 						<Table.Header className={styles.tableTop}>
@@ -249,19 +250,19 @@ export default class CountryTable extends Component {
 										{this.props.favoriteCountriesData.find(countryData => countryData.Country === Country)
 											?
 											<Icon className={styles.star} color="yellow" name='star' onClick={() => {
-												this.props.favoriteCountry(Country); 
+												this.props.favoriteCountry(Country);
 												localStorage.removeItem(CountryCode);
 
-												} 
-											}/>
+											}
+											} />
 											:
 											<Icon className={styles.star} color="white" name='star outline' onClick={() => {
 
-												this.props.favoriteCountry(Country); 
+												this.props.favoriteCountry(Country);
 												localStorage[CountryCode] = Country;
 												console.log(localStorage[CountryCode])
-												} 
-											}/>
+											}
+											} />
 										}
 										<div>{Country}</div>
 
