@@ -5,12 +5,12 @@ Covid19-Tracker is a responsive Single Page Application that tracks and displays
 
 
 ## Index
-- [Built With](https://github.com/shub-sharma/covid19-tracker#Built_With)
+- [Built With](https://github.com/shub-sharma/covid19-tracker#built-with)
 - [Screenshots](https://github.com/shub-sharma/covid19-tracker#screenshots)
 - [Features](https://github.com/shub-sharma/covid19-tracker#features)
 - [React App Documentation](https://github.com/shub-sharma/covid19-tracker#Create-React-App)
 
-## Built With
+<h2 id="built-with">Built With</h2>
 This project was built with create-react-app and Semantic UI.
 
 ## Screenshots
