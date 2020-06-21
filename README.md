@@ -17,9 +17,9 @@ This project was built with create-react-app and Semantic UI.
 Desktop
 <img src="pics/desktop.png">
 
-<img src="pics/iPad.png" width="47%" height="50%">
+<img src="pics/iPad.png">
 
-<img src="pics/iPhone.png" width="37.6%" height="29%">
+<img src="pics/iPhone.png">
 
 ## Features
 - Responsive web app which works seamlessly on all platforms (mobile, desktop, tablets etc.)
