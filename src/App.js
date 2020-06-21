@@ -1,9 +1,9 @@
 import React from 'react';
 
-import { Table, Cards, FavoriteTable } from './components';
+import { Table, Cards } from './components';
 import { fetchCountriesSummary } from './api';
 import styles from './App.module.css';
-import { Header, Loader } from 'semantic-ui-react'
+import { Loader } from 'semantic-ui-react'
 
 class App extends React.Component {
     state = {
@@ -14,6 +14,10 @@ class App extends React.Component {
         favoriteCountriesData: []
     }
 
+    /**
+     * Favorite a country by adding its data to favoriteCountriesData in state
+     * @param {*} country country to be favorited
+     */
     favoriteCountry = (country) =>  {
         var countryData = this.state.countriesData.find(countryObject => countryObject.Country === country)
 
@@ -27,9 +31,10 @@ class App extends React.Component {
                 favoriteCountriesData: [...prevState.favoriteCountriesData, countryData]
             }));
         }
-        console.log(this.state.favoriteCountriesData);
 	}
-
+    /**
+     * Obtain data from api. If data can't be loaded, set error message.
+     */
     async componentWillMount() {
         try {
             const data = await fetchCountriesSummary();
@@ -58,7 +63,6 @@ class App extends React.Component {
                 </div>
             );
         }
-        console.log(this.state);
         return (
             <div className={styles.container}>
                 <h1 className={styles.h1}>COVID-19 Tracker</h1>
@@ -66,8 +70,6 @@ class App extends React.Component {
                 <div className={styles.cards}>
                     <Cards data={this.state.globalData} />
                 </div>
-                {/* <FavoriteTable data={this.state.favoriteCountriesData} favoriteCountry={this.favoriteCountry} /> */}
-
                 <Table className={styles.table} data={this.state.countriesData} favoriteCountry={this.favoriteCountry} favoriteCountriesData={this.state.favoriteCountriesData}/>
 
             </div>

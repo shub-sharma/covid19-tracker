@@ -1,14 +1,11 @@
 import React, { Component } from 'react';
-import { Table, Image, Container, Header, Icon } from 'semantic-ui-react';
+import { Table, Image, Container, Icon } from 'semantic-ui-react';
 import _ from 'lodash';
 import styles from './CountryTable.module.css';
-
-
 
 export default class CountryTable extends Component {
 	constructor(props) {
 		super(props);
-		console.log(this.props);
 		this.state = {
 			column: null,
 			data: {},
@@ -19,7 +16,6 @@ export default class CountryTable extends Component {
 	 * Initially sort the total confirmed cases in a descending order
 	 */
 	componentWillMount() {
-		console.log(this.props)
 		this.setState(
 			{
 				column: 'TotalConfirmed',
@@ -33,9 +29,11 @@ export default class CountryTable extends Component {
 		}
 
 	}
-
+	/**
+	 * Sort the column of the table
+	 * @param {*} clickedColumn the column to be sorted
+	 */
 	handleSort = (clickedColumn) => () => {
-		console.log(clickedColumn);
 		const { column, data, direction } = this.state;
 		if (column !== clickedColumn) {
 			this.setState({
@@ -51,7 +49,9 @@ export default class CountryTable extends Component {
 			direction: direction === 'ascending' ? 'descending' : 'ascending',
 		})
 	}
-
+	/**
+	 * Render favorite table, very similar to country table
+	 */
 	renderFavTable = () => {
 		if (this.props.favoriteCountriesData.length === 0) return null;
 		let data = this.props.favoriteCountriesData;
@@ -135,7 +135,6 @@ export default class CountryTable extends Component {
 
 												this.props.favoriteCountry(Country);
 												localStorage[CountryCode] = Country;
-												console.log(localStorage[CountryCode])
 											}
 											} />
 										}
@@ -164,7 +163,6 @@ export default class CountryTable extends Component {
 		for (var country in data) {
 			data[country]['CurrentlyInfected'] = data[country].TotalConfirmed - data[country].TotalRecovered;
 		}
-		console.log(this.state);
 		return (
 			<Container>
 
@@ -260,7 +258,6 @@ export default class CountryTable extends Component {
 
 												this.props.favoriteCountry(Country);
 												localStorage[CountryCode] = Country;
-												console.log(localStorage[CountryCode])
 											}
 											} />
 										}

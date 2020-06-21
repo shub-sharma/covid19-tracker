@@ -1,3 +1,33 @@
+# Covid19-Tracker
+Covid19-Tracker is a responsive Single Page Application that tracks and displays the stats about COVID-19. It uses this [COVID-19 API](https://covid19api.com/) and allows users to favorite their countries of interest to see how far they've come in the batle against COVID-19.
+
+[Click here for a live demo](https://covid19-tracked.netlify.app/)
+
+
+## Index
+- [Built With](https://github.com/shub-sharma/covid19-tracker#Built_With)
+- [Screenshots](https://github.com/shub-sharma/covid19-tracker#screenshots)
+- [Features](https://github.com/shub-sharma/covid19-tracker#features)
+- [React App Documentation](https://github.com/shub-sharma/covid19-tracker#Create-React-App)
+
+## Built With
+This project was built with create-react-app and Semantic UI.
+
+## Screenshots
+Desktop
+<img src="pics/desktop.png">
+
+<img src="pics/iPad.png" width="50%" height="50%">
+
+<img src="pics/iPhone.png" width="37.6%" height="29%">
+
+## Features
+- Responsive web app which works seamlessly on all platforms (mobile, desktop, tablets etc.)
+- Ability to favorite certain countries of interest.
+
+
+----
+## Create-React-App
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
